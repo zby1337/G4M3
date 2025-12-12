@@ -64,17 +64,17 @@ class warrior(pygame.sprite.Sprite):
 		self.rect.center = (x, y)
 
 	#метод движения
-	def	move(self, moving_left, moving_right,): 
+	def	move(self, is_moving_left, is_moving_right, ):
 
 		dx = 0
 		dy = 0
 
-		if moving_left:
+		if is_moving_left:
 			dx = -self.speed
 			self.flip = True
 			self.direction = -1
 			
-		if moving_right:
+		if is_moving_right:
 			dx = self.speed
 			self.flip = False
 			self.direction = 1
@@ -185,3 +185,5 @@ while run:
 	pygame.display.update()		
 
 pygame.quit()
+
+
