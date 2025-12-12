@@ -1,4 +1,3 @@
-#тест
 import pygame
 import os
 
