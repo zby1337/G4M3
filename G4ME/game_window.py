@@ -15,13 +15,16 @@ FPS = 60
 
 GRAVITY = 0.75
 
-
 moving_left = False
 moving_right = False
 
 
+#Загрузка изображений
+#Пуля
+bullet_img = pygame.image.load('E:/CreateG4ME/DAAAAMN sprites/icons/bullet').convert_alpha()
+
 #определение цвета
-BG = (255,	192,	203)
+BG = (255,	192, 203)
 RED = (255, 255, 0)
 
 def draw_bg():
@@ -53,7 +56,7 @@ class warrior(pygame.sprite.Sprite):
 			#определение числа элементов в папке
 			num_of_frames = len(os.listdir(f'E:/CreateG4ME/DAAAAMN sprites/{self.char_type}/{animation}'))
 			for i in range (num_of_frames):
-				img = pygame.image.load(f'E:/CreateG4ME/DAAAAMN sprites/{self.char_type}/{animation}/{i}.png')
+				img = pygame.image.load(f'E:/CreateG4ME/DAAAAMN sprites/{self.char_type}/{animation}/{i}.png').convert_alpha()
 				img = pygame.transform.scale(img, (float(img.get_width() * scale), float(img.get_height() * scale)))
 				temp_list.append(img)
 			self.animation_list.append(temp_list)
@@ -62,6 +65,8 @@ class warrior(pygame.sprite.Sprite):
 		self.image = self.animation_list[self.action][self.frame_index]
 		self.rect = self.image.get_rect()
 		self.rect.center = (x, y)
+
+
 
 	#метод движения
 	def	move(self, is_moving_left, is_moving_right, ):
@@ -126,6 +131,21 @@ class warrior(pygame.sprite.Sprite):
 
 	def draw(self):
 		screen.blit(pygame.transform.flip(self.image, self.flip, False), self.rect)
+
+
+
+class Bullet(pygame.sprite.Sprite):
+	def __init__(self, char_type, x, y, direction):
+		pygame.sprite.Sprite.__init__(self)
+		self.speed = 10
+		self.image = bullet_img
+		self.rect = self.image.get_rect()
+		self.rect.center = (x, y)
+		self.direction = direction
+
+
+#создание группы спрайтов
+bullet_group = pygame.sprite.Group()
 
 
 player = warrior('player', 300, 200, 3, 5)
